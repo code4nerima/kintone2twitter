@@ -1,0 +1,59 @@
+{
+  "app": @app_id,
+  "properties": {
+    "投稿内容": {
+      "type": "MULTI_LINE_TEXT",
+      "code": "投稿内容",
+      "label": "投稿内容",
+      "noLabel": false,
+      "required": true,
+      "defaultValue": ""
+    },
+    "添付ファイル": {
+        "type": "FILE",
+        "code": "添付ファイル",
+        "label": "添付ファイル",
+        "noLabel": true,
+        "required": false,
+        "thumbnailSize": "150"
+    },
+    "twitter投稿済": {
+        "type": "CHECK_BOX",
+        "code": "twitter投稿済",
+        "label": "twitter投稿済",
+        "noLabel": false,
+        "required": false,
+        "options": {
+          "投稿済": {
+            "label": "投稿済",
+            "index": "0"
+          }
+        },
+        "defaultValue": [],
+        "align": "HORIZONTAL"
+    },
+    "twitter投稿日時": {
+        "type": "DATETIME",
+        "code": "twitter投稿日時",
+        "label": "twitter投稿日時",
+        "noLabel": false,
+        "required": false,
+        "unique": false,
+        "defaultValue": "",
+        "defaultNowValue": false
+    },
+    "twitter投稿メッセージ": {
+      "type": "SINGLE_LINE_TEXT",
+      "code": "twitter投稿メッセージ",
+      "label": "twitter投稿メッセージ",
+      "noLabel": false,
+      "required": false,
+      "minLength": "",
+      "maxLength": "",
+      "expression": "",
+      "hideExpression": false,
+      "unique": false,
+      "defaultValue": ""
+    }
+  }
+}
