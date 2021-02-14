@@ -97,15 +97,6 @@ namespace kintone2twitter.Models.FromKintone
         public Value2 Value { get; set; }
     }
 
-    public class ステータス
-    {
-        [JsonPropertyName("type")]
-        public string Type { get; set; }
-
-        [JsonPropertyName("value")]
-        public string Value { get; set; }
-    }
-
     public class Revision
     {
         [JsonPropertyName("type")]
@@ -166,6 +157,15 @@ namespace kintone2twitter.Models.FromKintone
         public List<Value3> Value { get; set; }
     }
 
+    public class 承認ステータス
+    {
+        [JsonPropertyName("type")]
+        public string Type { get; set; }
+
+        [JsonPropertyName("value")]
+        public string Value { get; set; }
+    }
+
     public class 投稿内容
     {
         [JsonPropertyName("type")]
@@ -210,9 +210,6 @@ namespace kintone2twitter.Models.FromKintone
         [JsonPropertyName("作成者")]
         public 作成者 作成者 { get; set; }
 
-        [JsonPropertyName("ステータス")]
-        public ステータス ステータス { get; set; }
-
         [JsonPropertyName("$revision")]
         public Revision Revision { get; set; }
 
@@ -233,6 +230,9 @@ namespace kintone2twitter.Models.FromKintone
 
         [JsonPropertyName("作成日時")]
         public 作成日時 作成日時 { get; set; }
+
+        [JsonPropertyName("承認ステータス")]
+        public 承認ステータス 承認ステータス { get; set; }
 
         [JsonPropertyName("$id")]
         public Id Id { get; set; }

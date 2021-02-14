@@ -35,6 +35,7 @@ namespace kintone2twitter.Controllers
         public async Task<IActionResult> Post([FromBody] KintoneWebhookRequest kintoneRequest)
         {
             var requestContent = $"Url={kintoneRequest.Url},App.Id={kintoneRequest.App.Id}" +
+                $",承認ステータス={kintoneRequest.Record.承認ステータス.Value}" +
                 $",Type={kintoneRequest.Type},Twitter投稿済={string.Join(",", kintoneRequest.Record.Twitter投稿済.Value)}" +
                 $",投稿内容={kintoneRequest.Record.投稿内容.Value}";
             _logger.LogInformation(requestContent);
@@ -42,7 +43,9 @@ namespace kintone2twitter.Controllers
             //Webhookで来たJsonのチェック。指定したサービス・アプリ・イベント以外はUnAuthorizedで返す
             if (!kintoneRequest.Url.StartsWith(_kintoneSettings.Value.ServiceUrl)) { return Unauthorized(); }
             if (kintoneRequest.App.Id != _kintoneSettings.Value.AppId) { return Unauthorized(); }
-            if (kintoneRequest.Type != "UPDATE_STATUS") { return Unauthorized(); }
+            if (kintoneRequest.Type != "UPDATE_RECORD") { return Unauthorized(); }
+
+            if (kintoneRequest.Record.承認ステータス.Value != "承認") { return NoContent(); }
 
             //投稿済は何もしない
             if (kintoneRequest.Record.Twitter投稿済.Value.Contains("投稿済")) { return NoContent(); }
