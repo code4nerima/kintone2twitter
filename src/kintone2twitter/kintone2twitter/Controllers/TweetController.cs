@@ -37,7 +37,7 @@ namespace kintone2twitter.Controllers
             var requestContent = $"Url={kintoneRequest.Url},App.Id={kintoneRequest.App.Id}" +
                 $",承認ステータス={kintoneRequest.Record.承認ステータス.Value}" +
                 $",Type={kintoneRequest.Type},Twitter投稿済={string.Join(",", kintoneRequest.Record.Twitter投稿済.Value)}" +
-                $",Twitter投稿メッセージ={kintoneRequest.Record.Twitter投稿メッセージ.Value}," +
+                $",Twitter投稿メッセージ={kintoneRequest.Record.Twitter投稿メッセージ.Value}" +
                 $",投稿内容={kintoneRequest.Record.投稿内容.Value}";
             _logger.LogInformation(requestContent);
 
