@@ -37,6 +37,7 @@ namespace kintone2twitter.Controllers
             var requestContent = $"Url={kintoneRequest.Url},App.Id={kintoneRequest.App.Id}" +
                 $",承認ステータス={kintoneRequest.Record.承認ステータス.Value}" +
                 $",Type={kintoneRequest.Type},Twitter投稿済={string.Join(",", kintoneRequest.Record.Twitter投稿済.Value)}" +
+                $",Twitter投稿メッセージ={kintoneRequest.Record.Twitter投稿メッセージ.Value}" +
                 $",投稿内容={kintoneRequest.Record.投稿内容.Value}";
             _logger.LogInformation(requestContent);
 
@@ -45,10 +46,14 @@ namespace kintone2twitter.Controllers
             if (kintoneRequest.App.Id != _kintoneSettings.Value.AppId) { return Unauthorized(); }
             if (kintoneRequest.Type != "UPDATE_RECORD") { return Unauthorized(); }
 
-            if (kintoneRequest.Record.承認ステータス.Value != "承認") { return NoContent(); }
+            //承認以外は何もしない
+            if (kintoneRequest.Record.承認ステータス.Value != "承認") { return Ok(); }
 
             //投稿済は何もしない
-            if (kintoneRequest.Record.Twitter投稿済.Value.Contains("投稿済")) { return NoContent(); }
+            if (kintoneRequest.Record.Twitter投稿済.Value.Contains("投稿済")) { return Ok(); }
+
+            //Twitter投稿メッセージが何か入っていたら、何もしない（エラー後の更新でループすることの回避）
+            if (!string.IsNullOrEmpty(kintoneRequest.Record.Twitter投稿メッセージ.Value)) { return Ok(); }
 
             //Twitterの認証情報セット
             var apiKey = _twitterSettings.Value.ApiKey;
