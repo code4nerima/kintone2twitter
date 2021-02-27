@@ -54,6 +54,28 @@
       "hideExpression": false,
       "unique": false,
       "defaultValue": ""
+    },
+    "承認ステータス": {
+      "type": "DROP_DOWN",
+      "code": "承認ステータス",
+      "label": "承認ステータス",
+      "noLabel": false,
+      "required": true,
+      "options": {
+        "未処理": {
+          "label": "未処理",
+          "index": "0"
+        },
+        "上長確認中": {
+          "label": "上長確認中",
+          "index": "1"
+        },
+        "承認": {
+          "label": "承認",
+          "index": "2"
+        }
+      },
+      "defaultValue": "未処理"
     }
   }
 }
