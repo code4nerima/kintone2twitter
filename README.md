@@ -10,15 +10,17 @@ RESTful APIにてTwitterへの投稿と、投稿結果のKintoneへの通知が�
 
 2. 登録したレコードを承認します。
 ![Kintoneで承認](./image/flow_02.PNG)
+![Kintoneで承認](./image/flow_03.PNG)
+
 
 3. 承認した内容でTwitterへ投稿されます。
-![Twitterへ投稿](./image/flow_03.PNG)
+![Twitterへ投稿](./image/flow_04.PNG)
 
 4. 正常に登録された場合、Kintoneに投稿結果が反映されます。
-![Kintoneへ反映](./image/flow_04.PNG)
+![Kintoneへ反映](./image/flow_05.PNG)
 
 ※Twitterへの投稿でエラーが発生した場合は、TwitterのAPIが返すエラーコードとメッセージをKintoneに反映します。
-![Twitterへ投稿エラー](./image/flow_05.PNG)
+![Twitterへ投稿エラー](./image/flow_06.PNG)
 
 # 開発環境
 ## kintoneのアプリ作成
@@ -37,7 +39,14 @@ $user_account='xxxx';  # kintoneにログインするユーザアカウント
 $password='xxxx';      # kintoneにログインするパスワード
 $app_name='xxxx';      # 作成するアプリの名前
 ```
-3. Powershellで実行
+3. Powershellで実行。正常に終了すると、以下の表示になります。
+
+![Powershellで実行](./image/app_01.png)
+
+4. kintoneのアプリ一覧で、作成されたアプリが表示されていることを確認します。
+
+![アプリ一覧で確認](./image/app_02.png)
+
 
 #### Mac/Linuxの場合
 （未作成）
@@ -50,26 +59,27 @@ $app_name='xxxx';      # 作成するアプリの名前
 1. 「生成する」を押してトークンを生成。アクセス権は「レコード閲覧」・「レコード編集」チェックをON
 1. 「保存」を押す
 
-### プロセス管理の有効化
-作成したKintoneのアプリ上で作業します。
-
-1. アプリの管理＞アプリの一覧＞設定 を開く
-1. 一般設定 ＞ プロセス管理 を開く
-1. 「1. 有効化」の「プロセス管理を有効にする」にチェックを入れる
-1. 任意の承認ルートを定義
-1. 「保存」を押す
+![APIトークン](./image/app_03.png)
 
 ### Webhookの登録
 作成したKintoneのアプリ上で作業します。
 
 1. 作成したアプリを開く
 1. カスタマイズ／サービス連携 ＞ Webhook を開く
-1. Webhook URLに、RESTful APIをデプロイした先のURLを指定。 `https://(デプロイしたサーバ)/api/Tweet`
-1. `通知を送信する条件` に任意の条件を指定。プロセス管理を有効化している場合は、「ステータスの更新」を指定。
+1. `説明`に任意の値を入力。
+1. `Webhook URL`に、RESTful APIをデプロイした先のURLを指定。 `https://(デプロイしたサーバ)/api/Tweet`
+1. `通知を送信する条件` に`レコードの編集`のみチェックを入れる。
+1. `このWebhookを有効にする`にチェックが入っていることを確認。
 1. 「保存」を押す。
+
+![Webhook](./image/app_04.png)
+
 
 ### アプリの公開
 アプリを公開する。（よく忘れる）
+
+![Webhook](./image/app_05.png)
+
 
 ## Twitterのキー発行
 ### 開発者ツールでのアプリ作成
